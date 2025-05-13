@@ -4,8 +4,10 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 function Registration() {
+  const router = useRouter();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -13,22 +15,24 @@ function Registration() {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:5000/api/user", user);
-      alert("User registered successfully!");
-      console.log("User registered successfully:", response.data);
-    } catch (error) {
-      if (error.response && error.response.status === 409) {
-        alert("User already exists with this email!");
-      } else if (error.response && error.response.status === 400) {
-        alert("Please fill all the fields!");
-      } else {
-        alert("Registration failed. Please try again.");
-        console.error("Error registering user:", error);
-      }
+  e.preventDefault();
+  try {
+    const response = await axios.post("http://localhost:5000/api/user", user);
+    alert("User registered successfully!");
+    console.log("User registered successfully:", response.data);
+    router.push('/AfterLogin'); 
+  } catch (error) {
+    if (error.response && error.response.status === 409) {
+      alert("User already exists with this email!");
+    } else if (error.response && error.response.status === 400) {
+      alert("Please fill all the fields!");
+    } else {
+      alert("Registration failed. Please try again.");
+      console.error("Error registering user:", error);
     }
-  };
+  }
+};
+
 
   return (
     <>

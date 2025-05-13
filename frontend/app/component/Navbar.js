@@ -19,7 +19,9 @@ function Navbar() {
         </div>
 
         <div className='flex space-x-4'>
+            <Link href="LoginPage">
             <button className='bg-black text-sm text-white py-2 px-4 rounded-full cursor-pointer hover:bg-white hover:text-black hover:border'>Login</button>
+            </Link>
             <Link href="RegistrationPage" >
             <button className='bg-black text-sm text-white py-2 px-4 rounded-full cursor-pointer hover:bg-white hover:text-black hover:border'>Sign Up</button>
             </Link>
