@@ -4,18 +4,21 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+
 function Login() {
   const router = useRouter();
   const [user, setUser] = React.useState({
     email: "",
     password: "",
   });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         "http://localhost:5000/api/login",
-        user
+        user,
+        { withCredentials: true }  
       );
       console.log("User logged in successfully:", response.data);
       router.push("/AfterLogin");
@@ -28,6 +31,7 @@ function Login() {
       }
     }
   };
+
   return (
     <>
       <Link
