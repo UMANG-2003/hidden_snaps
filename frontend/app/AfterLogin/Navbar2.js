@@ -53,6 +53,53 @@ function Navbar2() {
           <h1 className="text-black text-xl font-bold">Hidden Snaps</h1>
         </div>
 
+        <div className="hidden md:flex items-center space-x-4">
+          <ul>
+            <li
+              href="#home"
+              onClick={() =>
+                document
+                  .getElementById("home")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="inline-block text-sm text-black font-semibold px-4 py-2 cursor-pointer hover:bg-gray-200 rounded-full"
+            >
+              Home
+            </li>
+            <li
+              href="#gallery"
+              onClick={() =>
+                document
+                  .getElementById("gallery")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="inline-block text-sm text-black font-semibold px-4 py-2 cursor-pointer hover:bg-gray-200 rounded-full"
+            >
+              Gallery
+            </li>
+            <li
+              href="#about"
+              onClick={() =>
+                document
+                  .getElementById("about")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="inline-block text-sm text-black font-semibold px-4 py-2 cursor-pointer hover:bg-gray-200 rounded-full"
+            >
+              About
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-x-4 hidden md:flex">
+          <button
+            onClick={handleLogout}
+            className="bg-black text-sm text-white py-2 px-4 rounded-full cursor-pointer hover:bg-white hover:text-black hover:border"
+          >
+            Logout
+          </button>
+        </div>
+
         <div className="md:hidden">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
