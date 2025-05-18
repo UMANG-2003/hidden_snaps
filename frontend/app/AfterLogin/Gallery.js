@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 
 function Gallery() {
   const [images, setImages] = useState([]);
@@ -54,11 +55,16 @@ function Gallery() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
           {images.map((img) => (
             <div key={img._id} className="relative h-fit group rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow bg-white">
-              <img
-                src={img.url}
-                alt="user upload"
-                className="w-full transition-transform duration-200 group-hover:scale-105"
-              />
+              <div className="relative w-full h-64">
+                <Image
+                  src={img.url}
+                  alt="user upload"
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-200 group-hover:scale-105"
+                  unoptimized
+                />
+              </div>
               <button
                 onClick={() => handleDelete(img._id)}
                 disabled={deletingId === img._id}
