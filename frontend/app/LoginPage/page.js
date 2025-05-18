@@ -42,7 +42,7 @@ function Login() {
         <Image
           src="/logo.png"
           alt="Logo"
-          width={28}  // approx 7 * 4 = 28 px for w-7
+          width={28}  
           height={28}
           priority
         />
@@ -128,7 +128,7 @@ function Login() {
         </form>
         <div className="">
           <p className="text-center text-sm text-gray-700">
-            Don't have an account?{" "}
+            Dont have an account?{" "}
             <Link
               href="/RegistrationPage"
               className="text-blue-600 hover:text-blue-500"
