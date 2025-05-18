@@ -2,16 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-
 function Gallery() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [deletingId, setDeletingId] = useState(null);
+  const [deletingId, setDeletingId] = useState(null); // To track which image is being deleted
 
   const fetchImages = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("https://hidden-snaps-backend.onrender.com/api/images", {
+      const res = await axios.get("http://localhost:5000/api/images", {
         withCredentials: true,
       });
       setImages(res.data);
@@ -32,11 +31,11 @@ function Gallery() {
 
     try {
       setDeletingId(id);
-      await axios.delete(`https://hidden-snaps-backend.onrender.com/api/images/${id}`, {
+      await axios.delete(`http://localhost:5000/api/images/${id}`, {
         withCredentials: true,
       });
       setDeletingId(null);
-      fetchImages(); 
+      fetchImages(); // Refresh after deletion
     } catch (error) {
       console.error("Failed to delete image:", error);
       setDeletingId(null);
@@ -44,31 +43,47 @@ function Gallery() {
   };
 
   return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Your Gallery</h2>
+    <div style={{ padding: "2rem" }}>
+      <h2>Your Gallery</h2>
 
       {loading ? (
-        <p className="text-gray-500">Loading images...</p>
+        <p>Loading images...</p>
       ) : images.length === 0 ? (
-        <p className="text-gray-500">No images uploaded yet.</p>
+        <p>No images uploaded yet.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+            gap: "1rem",
+            marginTop: "1rem",
+          }}
+        >
           {images.map((img) => (
-            <div key={img._id} className="relative h-fit group rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow bg-white">
-              <div className="relative w-full h-64">
-                <img
-                  src={img.url}
-                  alt="user upload"
-                  layout="fill"
-                  className="transition-transform duration-200 group-hover:scale-105"
-                />
-              </div>
+            <div key={img._id} style={{ position: "relative" }}>
+              <img
+                src={img.url}
+                alt="user upload"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }}
+              />
               <button
                 onClick={() => handleDelete(img._id)}
                 disabled={deletingId === img._id}
-                className={`absolute top-3 right-3 px-3 py-1 rounded bg-red-600 text-white text-sm font-semibold shadow hover:bg-red-700 transition-colors ${
-                  deletingId === img._id ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
-                }`}
+                style={{
+                  position: "absolute",
+                  top: "5px",
+                  right: "5px",
+                  backgroundColor: deletingId === img._id ? "gray" : "rgba(255, 0, 0, 0.7)",
+                  color: "#fff",
+                  border: "none",
+                  padding: "5px 10px",
+                  cursor: "pointer",
+                  borderRadius: "4px",
+                }}
               >
                 {deletingId === img._id ? "Deleting..." : "Delete"}
               </button>
@@ -76,7 +91,7 @@ function Gallery() {
           ))}
         </div>
       )}
-    </div>      
+    </div>
   );
 }
 

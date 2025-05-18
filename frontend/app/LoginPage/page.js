@@ -16,7 +16,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://hidden-snaps-backend.onrender.com/api/login",
+        "http://localhost:5000/api/login",
         user,
         { withCredentials: true }  
       );

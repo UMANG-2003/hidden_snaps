@@ -1,39 +1,45 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function UserCard() {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get('https://hidden-snaps-backend.onrender.com/api/logedinUser', { withCredentials: true })
-        setUser(response.data)
+        const response = await axios.get('http://localhost:5000/api/logedinUser', {
+          withCredentials: true,
+        });
+        setUser(response.data);
       } catch (err) {
-        setError(err)
+        setError(err);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    fetchUser()
-  }, [])
+    };
+
+    fetchUser();
+  }, []);
 
   return (
-    <div className='w-[90%] mx-auto text-black mt-24 flex flex-col items-center justify-center bg-gray-400 p-4 rounded-xl'>
-      <h2 className='text-2xl font-bold text-center'>User Information</h2>
-      {loading && <p>Loading...</p>}
-      {error && <p className='text-red-400'>Error: {error.message}</p>}
+    <div className="w-[90%] mx-auto mt-24 p-6 bg-gray-100 text-black rounded-xl shadow-lg flex flex-col items-center justify-center">
+      <h2 className="text-2xl font-bold mb-4">User Information</h2>
+
+      {loading && <p className="text-blue-500">Loading...</p>}
+
+      {error && <p className="text-red-500">Error: {error.message}</p>}
+
       {user && (
-        <>
-          <p className='mt-2 font-bold'>Name: {user.name}</p>
-          <p className='font-bold'>Email: {user.email}</p>
-        </>
+        <div className="text-center">
+          <p className="font-semibold text-lg">👤 Name: <span className="text-gray-700">{user.name}</span></p>
+          <p className="font-semibold text-lg">📧 Email: <span className="text-gray-700">{user.email}</span></p>
+        </div>
       )}
     </div>
-  )
+  );
 }
 
-export default UserCard
+export default UserCard;

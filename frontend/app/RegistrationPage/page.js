@@ -17,7 +17,7 @@ function Registration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://hidden-snaps-backend.onrender.com/api/user", user,{ withCredentials: true } );
+      const response = await axios.post("http://localhost:5000/api/user", user,{ withCredentials: true } );
       alert("User registered successfully!");
       console.log("User registered successfully:", response.data);
       router.push("/AfterLogin");
