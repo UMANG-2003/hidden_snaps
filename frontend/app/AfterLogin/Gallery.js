@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Image from 'next/image';
+
 
 function Gallery() {
   const [images, setImages] = useState([]);
@@ -56,13 +56,11 @@ function Gallery() {
           {images.map((img) => (
             <div key={img._id} className="relative h-fit group rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow bg-white">
               <div className="relative w-full h-64">
-                <Image
+                <img
                   src={img.url}
                   alt="user upload"
                   layout="fill"
-                  objectFit="cover"
                   className="transition-transform duration-200 group-hover:scale-105"
-                  unoptimized
                 />
               </div>
               <button
