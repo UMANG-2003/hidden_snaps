@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 function Gallery() {
     const images = [
@@ -18,7 +19,14 @@ function Gallery() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-10">
         {images.map((image, index) => (
           <div key={index} className="bg-gray-200 rounded-lg shadow-md h-fit">
-            <img src={image} alt={`Gallery Image ${index + 1}`} className="w-full h-fit rounded-t-lg " />
+            <Image 
+              src={image} 
+              alt={`Gallery Image ${index + 1}`} 
+              width={600} 
+              height={400} 
+              className="w-full h-fit rounded-t-lg" 
+              style={{ objectFit: 'cover' }}
+            />
           </div>
         ))}
       </div>
