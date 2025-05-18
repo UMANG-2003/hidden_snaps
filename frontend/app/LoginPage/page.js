@@ -2,6 +2,7 @@
 import React from "react";
 import axios from "axios";
 import Link from "next/link";
+import Image from "next/image";  // imported Image here
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
@@ -38,7 +39,13 @@ function Login() {
         href={"/"}
         className="absolute top-5 left-5 flex items-center space-x-2"
       >
-        <img className="w-7" src="/logo.png" alt="" />
+        <Image
+          src="/logo.png"
+          alt="Logo"
+          width={28}  // approx 7 * 4 = 28 px for w-7
+          height={28}
+          priority
+        />
         <h1 className="text-black text-xl font-bold">Hidden Snaps</h1>
         <p>(back home)</p>
       </Link>
