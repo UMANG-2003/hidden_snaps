@@ -15,7 +15,7 @@ function AddPhotos() {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/api/upload", formData, {
+      await axios.post("https://hidden-snaps-backend.onrender.com/api/upload", formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });

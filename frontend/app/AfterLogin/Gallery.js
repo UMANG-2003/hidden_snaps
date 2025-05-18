@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 function Gallery() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +11,7 @@ function Gallery() {
   const fetchImages = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/images", {
+      const res = await axios.get("https://hidden-snaps-backend.onrender.com/api/images", {
         withCredentials: true,
       });
       setImages(res.data);
@@ -31,7 +32,7 @@ function Gallery() {
 
     try {
       setDeletingId(id);
-      await axios.delete(`http://localhost:5000/api/images/${id}`, {
+      await axios.delete(`https://hidden-snaps-backend.onrender.com/api/images/${id}`, {
         withCredentials: true,
       });
       setDeletingId(null);
@@ -54,11 +55,14 @@ function Gallery() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
           {images.map((img) => (
             <div key={img._id} className="relative h-fit group rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow bg-white">
-              <img
-                src={img.url}
-                alt="user upload"
-                className="w-full transition-transform duration-200 group-hover:scale-105"
-              />
+              <div className="relative w-full h-64">
+                <img
+                  src={img.url}
+                  alt="user upload"
+                  layout="fill"
+                  className="transition-transform duration-200 group-hover:scale-105"
+                />
+              </div>
               <button
                 onClick={() => handleDelete(img._id)}
                 disabled={deletingId === img._id}

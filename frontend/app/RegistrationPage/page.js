@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+
 function Registration() {
   const router = useRouter();
   const [user, setUser] = useState({
@@ -16,7 +17,7 @@ function Registration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/user", user,{ withCredentials: true } );
+      const response = await axios.post("https://hidden-snaps-backend.onrender.com/api/user", user,{ withCredentials: true } );
       alert("User registered successfully!");
       console.log("User registered successfully:", response.data);
       router.push("/AfterLogin");
@@ -38,7 +39,7 @@ function Registration() {
         href="/"
         className="absolute top-5 left-5 flex items-center space-x-2"
       >
-        <img className="w-7" src="/logo.png" alt="Logo" />
+        <img className="w-7" src="/logo.png" alt="Logo" width={28} height={28} />
         <h1 className="text-black text-xl font-bold">Hidden Snaps</h1>
         <p>(back home)</p>
       </Link>

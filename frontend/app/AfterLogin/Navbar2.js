@@ -1,4 +1,5 @@
 "use client";
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
@@ -10,7 +11,7 @@ function Navbar2() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/logout",
+        "https://hidden-snaps-backend.onrender.com/api/logout",
         {},
         {
           withCredentials: true,
@@ -49,14 +50,19 @@ function Navbar2() {
     <>
       <nav className="w-full p-4 h-16 flex items-center justify-between fixed top-0 bg-white shadow-md z-10">
         <div className="flex items-center space-x-2">
-          <img className="w-7" src="/logo.png" alt="Logo" />
+          <img
+            src="/logo.png"
+            alt="Logo"
+            width={28}
+            height={28}
+            className="w-7 h-7"
+          />
           <h1 className="text-black text-xl font-bold">Hidden Snaps</h1>
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
           <ul>
             <li
-              href="#home"
               onClick={() =>
                 document
                   .getElementById("home")
@@ -67,7 +73,6 @@ function Navbar2() {
               Home
             </li>
             <li
-              href="#gallery"
               onClick={() =>
                 document
                   .getElementById("gallery")
@@ -78,7 +83,6 @@ function Navbar2() {
               Gallery
             </li>
             <li
-              href="#about"
               onClick={() =>
                 document
                   .getElementById("about")

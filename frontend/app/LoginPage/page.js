@@ -16,7 +16,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/login",
+        "https://hidden-snaps-backend.onrender.com/api/login",
         user,
         { withCredentials: true }  
       );
@@ -38,7 +38,12 @@ function Login() {
         href={"/"}
         className="absolute top-5 left-5 flex items-center space-x-2"
       >
-        <img className="w-7" src="/logo.png" alt="" />
+        <img
+          src="/logo.png"
+          alt="Logo"
+          width={28}  
+          height={28}
+        />
         <h1 className="text-black text-xl font-bold">Hidden Snaps</h1>
         <p>(back home)</p>
       </Link>
@@ -121,7 +126,7 @@ function Login() {
         </form>
         <div className="">
           <p className="text-center text-sm text-gray-700">
-            Don't have an account?{" "}
+            Dont have an account?{" "}
             <Link
               href="/RegistrationPage"
               className="text-blue-600 hover:text-blue-500"
