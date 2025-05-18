@@ -10,7 +10,7 @@ function Gallery() {
   const fetchImages = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/images", {
+      const res = await axios.get("https://hidden-snaps-backend.onrender.com/api/images", {
         withCredentials: true,
       });
       setImages(res.data);
@@ -31,7 +31,7 @@ function Gallery() {
 
     try {
       setDeletingId(id);
-      await axios.delete(`http://localhost:5000/api/images/${id}`, {
+      await axios.delete(`https://hidden-snaps-backend.onrender.com/api/images/${id}`, {
         withCredentials: true,
       });
       setDeletingId(null);
