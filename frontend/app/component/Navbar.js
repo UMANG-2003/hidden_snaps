@@ -30,7 +30,7 @@ function Navbar() {
   
     <nav className='w-full  p-4 h-16 flex items-center justify-between fixed top-0 bg-white shadow-md z-10 '>
         <div className='flex items-center space-x-2'>
-            <Image className='w-7' src="/logo.png" alt="" width={28} height={28} />
+            <img className='w-7' src="/logo.png" alt="" width={28} height={28} />
             <h1 className='text-black text-xl font-bold'>Hidden Snaps</h1>
         </div>  
 
