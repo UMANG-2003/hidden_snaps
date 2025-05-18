@@ -1,6 +1,6 @@
 "use client"
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function UserCard() {
   const [user, setUser] = useState(null)

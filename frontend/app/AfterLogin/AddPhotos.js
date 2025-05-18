@@ -4,7 +4,7 @@ import axios from "axios";
 
 function AddPhotos() {
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleUpload = async (e) => {
     e.preventDefault();

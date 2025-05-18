@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 
 function Sidebar2({ isOpen, sidebarRef }) {
   const router = useRouter();
