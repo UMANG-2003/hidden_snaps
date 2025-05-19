@@ -33,9 +33,9 @@ function UserCard() {
       {error && <p className="text-red-500">Error: {error.message}</p>}
 
       {user && (
-        <div className="text-center">
-          <p className="font-semibold text-lg">👤 Name: <span className="text-gray-700">{user.name}</span></p>
-          <p className="font-semibold text-lg">📧 Email: <span className="text-gray-700">{user.email}</span></p>
+        <div className="mt-3">
+          <p className="font-semibold text-sm">👤 Name: <span className="text-gray-700 text-sm">{user.name}</span></p>
+          <p className="font-semibold text-sm">📧 Email: <span className="text-gray-700 text-sm">{user.email}</span></p>
         </div>
       )}
     </div>

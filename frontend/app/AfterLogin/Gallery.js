@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 
 function Gallery() {
   const [images, setImages] = useState([]);
@@ -61,14 +62,18 @@ function Gallery() {
         >
           {images.map((img) => (
             <div key={img._id} style={{ position: "relative" }}>
-              <img
+              <Image
                 src={img.url}
                 alt="user upload"
+                width={400}
+                height={300}
                 style={{
                   width: "100%",
                   height: "auto",
                   borderRadius: "8px",
+                  objectFit: "cover",
                 }}
+                 priority
               />
               <button
                 onClick={() => handleDelete(img._id)}

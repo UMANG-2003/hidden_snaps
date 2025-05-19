@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 function Login() {
   const router = useRouter();
@@ -38,10 +39,11 @@ function Login() {
         href={"/"}
         className="absolute top-5 left-5 flex items-center space-x-2"
       >
-        <img
+        <Image
           src="/logo.png"
           alt="Logo"
-          width={28}  
+          className="w-auto h-auto"
+          width={28}
           height={28}
         />
         <h1 className="text-black text-xl font-bold">Hidden Snaps</h1>

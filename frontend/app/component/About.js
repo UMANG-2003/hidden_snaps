@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 function About() {
   return (
@@ -27,9 +28,9 @@ function About() {
 
         <div className='bg-black bg2 w-[70%] h-[70vh] max-md:h-[100%] max-md:w-full rounded-lg'>
             <div className='flex flex-wrap justify-around items-center h-full p-5'>
-                <img src="https://images.pexels.com/photos/2026960/pexels-photo-2026960.jpeg?auto=compress&cs=tinysrgb&w=600" className='w-[25%] max-md:h-[45%] max-md:w-[30%]  rounded-xl' alt="" />
-                <img src="https://images.pexels.com/photos/2130795/pexels-photo-2130795.jpeg?auto=compress&cs=tinysrgb&w=600" className='w-[25%] max-md:h-[45%] max-md:w-[30%] rounded-xl' alt="" />
-                <img src="https://images.pexels.com/photos/1882309/pexels-photo-1882309.jpeg?auto=compress&cs=tinysrgb&w=600" className='w-[25%] max-md:h-[45%] max-md:w-[30%] rounded-xl' alt="" />
+                <Image src="/ab1.jpeg" className='w-[25%] max-md:h-[45%] max-md:w-[30%]  rounded-xl' width={600} height={400} alt="" />
+                <Image src="/ab2.jpeg" className='w-[25%] max-md:h-[45%] max-md:w-[30%] rounded-xl'  width={600} height={400} alt="" />
+                <Image src="/ab3.webp" className='w-[25%] max-md:h-[45%] max-md:w-[30%] rounded-xl'  width={600} height={400} alt="" />
             </div>
         </div>
       </div>

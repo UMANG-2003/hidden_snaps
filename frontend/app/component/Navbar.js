@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from 'next/link';
 import Sidebar from "./Sidebar";
+import Image from "next/image";
 
 function Navbar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,7 +30,7 @@ function Navbar() {
   
     <nav className='w-full  p-4 h-16 flex items-center justify-between fixed top-0 bg-white shadow-md z-10 '>
         <div className='flex items-center space-x-2'>
-            <img className='w-7' src="/logo.png" alt="" />
+            <Image className='w-auto h-auto' src="/logo.png" alt="" width={28} height={28} />
             <h1 className='text-black text-xl font-bold'>Hidden Snaps</h1>
         </div>  
 
