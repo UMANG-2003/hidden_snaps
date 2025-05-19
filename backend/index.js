@@ -24,7 +24,6 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => {
@@ -32,13 +31,11 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1);
   });
 
-
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
   api_secret: process.env.CLOUD_API_SECRET,
 });
-
 
 const authenticateUser = (req, res, next) => {
   const token = req.cookies.token;
@@ -53,7 +50,7 @@ const authenticateUser = (req, res, next) => {
   }
 };
 
-
+// Registration route with updated cookie options
 app.post("/api/user", async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password)
@@ -69,7 +66,14 @@ app.post("/api/user", async (req, res) => {
     await user.save();
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-    res.cookie("token", token, { httpOnly: true, sameSite: "Lax", maxAge: 3600000 });
+
+    // Fix: use sameSite: 'none' and secure: true for cross-origin cookie support
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "none", // Allow cross-origin cookie
+      secure: true,     // Must be true for sameSite:none and HTTPS
+      maxAge: 3600000,
+    });
 
     res.status(201).json({ message: "User created", user: { name: user.name, email: user.email } });
   } catch (error) {
@@ -77,7 +81,7 @@ app.post("/api/user", async (req, res) => {
   }
 });
 
-
+// Login route with updated cookie options
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
@@ -92,7 +96,14 @@ app.post("/api/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-    res.cookie("token", token, { httpOnly: true, sameSite: "Lax", maxAge: 3600000 });
+
+    // Fix: same cookie options as in registration
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      maxAge: 3600000,
+    });
 
     res.status(200).json({ message: "Login successful", user: { name: user.name, email: user.email } });
   } catch (err) {
@@ -100,12 +111,10 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-
 app.post("/api/logout", (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ message: "Logged out successfully" });
 });
-
 
 app.get("/api/logedinUser", authenticateUser, async (req, res) => {
   try {
@@ -116,7 +125,6 @@ app.get("/api/logedinUser", authenticateUser, async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -150,7 +158,6 @@ app.post("/api/upload", authenticateUser, upload.single("image"), async (req, re
   }
 });
 
-
 app.get("/api/images", authenticateUser, async (req, res) => {
   try {
     const images = await Image.find({ userId: req.user.id }).sort({ createdAt: -1 });
@@ -159,7 +166,6 @@ app.get("/api/images", authenticateUser, async (req, res) => {
     res.status(500).json({ message: "Failed to fetch images" });
   }
 });
-
 
 app.delete("/api/images/:id", authenticateUser, async (req, res) => {
   try {
