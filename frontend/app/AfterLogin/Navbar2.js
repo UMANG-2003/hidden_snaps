@@ -12,7 +12,7 @@ function Navbar2() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/logout",
+        "https://hidden-snaps-backend.onrender.com/api/logout",
         {},
         {
           withCredentials: true,

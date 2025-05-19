@@ -6,12 +6,12 @@ import Image from 'next/image';
 function Gallery() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [deletingId, setDeletingId] = useState(null); // To track which image is being deleted
+  const [deletingId, setDeletingId] = useState(null); 
 
   const fetchImages = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/images", {
+      const res = await axios.get("https://hidden-snaps-backend.onrender.com/api/images", {
         withCredentials: true,
       });
       setImages(res.data);
@@ -32,11 +32,11 @@ function Gallery() {
 
     try {
       setDeletingId(id);
-      await axios.delete(`http://localhost:5000/api/images/${id}`, {
+      await axios.delete(`https://hidden-snaps-backend.onrender.com/api/images/${id}`, {
         withCredentials: true,
       });
       setDeletingId(null);
-      fetchImages(); // Refresh after deletion
+      fetchImages(); 
     } catch (error) {
       console.error("Failed to delete image:", error);
       setDeletingId(null);

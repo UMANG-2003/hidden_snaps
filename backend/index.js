@@ -24,7 +24,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-// MongoDB connection
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => {
@@ -32,14 +32,14 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1);
   });
 
-// Cloudinary config
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-// Authentication middleware
+
 const authenticateUser = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) return res.status(401).json({ message: "Unauthorized" });
@@ -53,7 +53,7 @@ const authenticateUser = (req, res, next) => {
   }
 };
 
-// Register
+
 app.post("/api/user", async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password)
@@ -77,7 +77,7 @@ app.post("/api/user", async (req, res) => {
   }
 });
 
-// Login
+
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
@@ -100,13 +100,13 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Logout
+
 app.post("/api/logout", (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ message: "Logged out successfully" });
 });
 
-// Get logged-in user info
+
 app.get("/api/logedinUser", authenticateUser, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -117,11 +117,10 @@ app.get("/api/logedinUser", authenticateUser, async (req, res) => {
   }
 });
 
-// Multer setup for image upload
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// Upload image
 app.post("/api/upload", authenticateUser, upload.single("image"), async (req, res) => {
   if (!req.file) return res.status(400).json({ message: "No image uploaded" });
 
@@ -151,7 +150,7 @@ app.post("/api/upload", authenticateUser, upload.single("image"), async (req, re
   }
 });
 
-// Get user's images
+
 app.get("/api/images", authenticateUser, async (req, res) => {
   try {
     const images = await Image.find({ userId: req.user.id }).sort({ createdAt: -1 });
@@ -161,7 +160,7 @@ app.get("/api/images", authenticateUser, async (req, res) => {
   }
 });
 
-// Delete image
+
 app.delete("/api/images/:id", authenticateUser, async (req, res) => {
   try {
     const image = await Image.findById(req.params.id);

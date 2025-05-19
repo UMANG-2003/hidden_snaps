@@ -10,7 +10,7 @@ function UserCard() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/logedinUser', {
+        const response = await axios.get('https://hidden-snaps-backend.onrender.com/api/logedinUser', {
           withCredentials: true,
         });
         setUser(response.data);

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function AddPhotos() {
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false); // loading state
+  const [loading, setLoading] = useState(false); 
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -16,13 +16,13 @@ function AddPhotos() {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/api/upload", formData, {
+      await axios.post("https://hidden-snaps-backend.onrender.com/api/upload", formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });
       setFile(null);
       setLoading(false);
-      window.location.reload(); // 🔄 Reload page after upload
+      window.location.reload(); 
     } catch (error) {
       console.error("Upload failed", error);
       setLoading(false);
