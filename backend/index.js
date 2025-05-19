@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import { v2 as cloudinary } from "cloudinary";
 
 import User from "./model/registration.js";
-import Image from "./model/image.js";
+import Image from "./model/Image.js";
 
 dotenv.config();
 const app = express();
