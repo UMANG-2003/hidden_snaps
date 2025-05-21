@@ -28,6 +28,7 @@ function About() {
                 href="https://www.instagram.com/_umang_k991/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="flex items-center gap-2"
               >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/87/87390.png"
