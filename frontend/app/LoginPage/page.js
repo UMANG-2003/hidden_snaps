@@ -12,14 +12,16 @@ function Login() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://hidden-snaps-backend.onrender.com/api/login",
         user,
-        { withCredentials: true }  
+        { withCredentials: true }
       );
       console.log("User logged in successfully:", response.data);
       router.push("/AfterLogin");
@@ -30,6 +32,8 @@ function Login() {
         alert("Login failed. Please try again.");
         console.error("Error logging in user:", error);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,6 +77,7 @@ function Login() {
               placeholder="Enter your email"
               onChange={(e) => setUser({ ...user, email: e.target.value })}
               required
+              disabled={loading}
             />
           </div>
           <div>
@@ -91,6 +96,7 @@ function Login() {
               placeholder="Enter your password"
               onChange={(e) => setUser({ ...user, password: e.target.value })}
               required
+              disabled={loading}
             />
           </div>
           <div className="flex items-center justify-between mt-4">
@@ -100,6 +106,7 @@ function Login() {
                 name="remember-me"
                 type="checkbox"
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                disabled={loading}
               />
               <label
                 htmlFor="remember-me"
@@ -121,8 +128,9 @@ function Login() {
             <button
               type="submit"
               className="mt-7 w-[40%] p-2 bg-green-600 text-white border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm cursor-pointer"
+              disabled={loading}
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
           </div>
         </form>

@@ -13,9 +13,11 @@ function Registration() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://hidden-snaps-backend.onrender.com/api/user",
@@ -34,6 +36,8 @@ function Registration() {
         alert("Registration failed. Please try again.");
         console.error("Error registering user:", error);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,6 +82,7 @@ function Registration() {
               placeholder="Enter your name"
               onChange={(e) => setUser({ ...user, name: e.target.value })}
               required
+              disabled={loading}
             />
           </div>
           <div className="mt-4">
@@ -96,6 +101,7 @@ function Registration() {
               placeholder="Enter your email"
               onChange={(e) => setUser({ ...user, email: e.target.value })}
               required
+              disabled={loading}
             />
           </div>
           <div className="mt-4">
@@ -114,14 +120,16 @@ function Registration() {
               placeholder="Enter your password"
               onChange={(e) => setUser({ ...user, password: e.target.value })}
               required
+              disabled={loading}
             />
           </div>
           <div className="flex justify-center">
             <button
               type="submit"
               className="mt-7 w-[40%] p-2 bg-green-600 text-white border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm cursor-pointer"
+              disabled={loading}
             >
-              Sign Up
+              {loading ? "Signing Up..." : "Sign Up"}
             </button>
           </div>
         </form>
