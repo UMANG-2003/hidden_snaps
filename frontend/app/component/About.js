@@ -18,7 +18,7 @@ function About() {
 
             <div>
                 <button className='flex items-center gap-2 bg-pink-300 text-black rounded-full px-4 py-2 mt-5 cursor-pointer'>
-                    <a href="https://www.instagram.com/hidden_snaps_/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.instagram.com/_umang_k991/" target="_blank" rel="noopener noreferrer">
                         <img src="https://cdn-icons-png.flaticon.com/512/87/87390.png" alt="" className='w-[20px] h-[20px]' />
                     </a>
                     <span className='text-black text font-bold'>Instagram</span>
